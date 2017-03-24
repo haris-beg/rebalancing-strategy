@@ -12,18 +12,28 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 public class InputCsvFileHandler implements InputFileHandler {
+	
+	@Value("${input.file.path}")
+	private String inputFilePath;
+	
+	@Value("${input.file.extension}")
+	private String inputFileExtension;
+	
+	@Value("${price.date.format}")
+	private String priceDateFormat;
+
 	@Autowired
 	DbHandler dbHandler;
 	
 	private static final Log log = LogFactory.getLog(InputCsvFileHandler.class);
-	private static final String FILEPATH = "C:\\git-repos\\download-stock-histories\\csv1\\";
 	
 	@Override
-	public void process(String ticker, String extension) {
+	public void process(String ticker) {
 		log.info("Inside InputCsvFileHandler.process()...");
-		String filename = FILEPATH + ticker + extension;
+		String filename = inputFilePath + ticker + inputFileExtension;
 		int recordCount = 0;
 		try {
 			log.info("Reading file " + filename);
@@ -31,7 +41,8 @@ public class InputCsvFileHandler implements InputFileHandler {
 			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
 			for (CSVRecord record : records) {
 				YahooHistory yahooHistory = parseYahooHistoryRecord(record);
-//				if (++recordCount < 2) {
+				recordCount++;
+//				if (recordCount < 2) {
 //					yahooHistory.print();
 //				}
 				dbHandler.loadYahooHistoryRecord(yahooHistory);
@@ -49,7 +60,7 @@ public class InputCsvFileHandler implements InputFileHandler {
 	private YahooHistory parseYahooHistoryRecord(CSVRecord record) {
 		YahooHistory yahooHistory = new YahooHistory();
 		try {
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			DateFormat df = new SimpleDateFormat(priceDateFormat);
 			yahooHistory.setPriceDate(df.parse(record.get("Date")));
 			yahooHistory.setOpeningPrice(Float.parseFloat(record.get("Open")));
 			yahooHistory.setHighPrice(Float.parseFloat(record.get("High")));

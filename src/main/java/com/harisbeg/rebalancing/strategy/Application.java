@@ -26,7 +26,7 @@ public class Application implements CommandLineRunner {
 	
 	 @Override
 	 public void run(String... strings) throws Exception {
-		 inputFileHandler.process("GLD", ".csv");
+		 inputFileHandler.process("GLD");
 		 dbHandler.count();
 	 }
 }
