@@ -1,6 +1,6 @@
 package com.harisbeg.rebalancing.strategy;
 
-public interface DbValidator {
+public interface DbHandler {
 
 	void count();
 

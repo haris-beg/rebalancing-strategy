@@ -20,7 +20,7 @@ public class Application implements CommandLineRunner {
 	}
 	
 	@Autowired
-	DbValidator dbValidator;
+	DbHandler dbHandler;
 
 	@Autowired
 	InputFileHandler inputFileHandler;
@@ -28,6 +28,6 @@ public class Application implements CommandLineRunner {
 	 @Override
 	 public void run(String... strings) throws Exception {
 		 inputFileHandler.process("GLD", ".csv");
-		 dbValidator.count();
+		 dbHandler.count();
 	 }
 }

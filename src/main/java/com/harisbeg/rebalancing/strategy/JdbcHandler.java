@@ -5,9 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JdbcValidator implements DbValidator {
+public class JdbcHandler implements DbHandler {
 	
-	private static final Logger log = LoggerFactory.getLogger(JdbcValidator.class);
+	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
 
 	@Autowired
     JdbcTemplate jdbcTemplate;

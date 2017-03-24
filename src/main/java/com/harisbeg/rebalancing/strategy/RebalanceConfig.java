@@ -12,8 +12,8 @@ public class RebalanceConfig {
 	}
 
 	@Bean
-	public DbValidator dbValidator() {
-		return new JdbcValidator();
+	public DbHandler dbHandler() {
+		return new JdbcHandler();
 	}
 
 }
