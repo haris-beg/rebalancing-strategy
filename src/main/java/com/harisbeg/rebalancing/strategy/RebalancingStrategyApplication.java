@@ -20,10 +20,14 @@ public class RebalancingStrategyApplication implements CommandLineRunner {
 	}
 	
 	@Autowired
+	DbValidator dbValidator;
+
+	@Autowired
 	InputFileHandler inputFileHandler;
 	
 	 @Override
 	 public void run(String... strings) throws Exception {
 		 inputFileHandler.process("GLD", ".csv");
+		 dbValidator.count();
 	 }
 }

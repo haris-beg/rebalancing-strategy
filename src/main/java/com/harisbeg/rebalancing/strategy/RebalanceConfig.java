@@ -10,4 +10,10 @@ public class RebalanceConfig {
 	public InputFileHandler inputFileHandler() {
 		return new InputCsvFileHandler();
 	}
+
+	@Bean
+	public DbValidator dbValidator() {
+		return new JdbcValidator();
+	}
+
 }
