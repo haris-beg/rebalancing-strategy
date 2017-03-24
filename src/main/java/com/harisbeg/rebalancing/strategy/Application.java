@@ -13,10 +13,10 @@ import org.springframework.context.ApplicationContext;
  *
  */
 @SpringBootApplication
-public class RebalancingStrategyApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RebalancingStrategyApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 	
 	@Autowired
