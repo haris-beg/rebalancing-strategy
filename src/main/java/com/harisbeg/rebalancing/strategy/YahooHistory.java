@@ -1,8 +1,12 @@
 package com.harisbeg.rebalancing.strategy;
 
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class YahooHistory {
+	
+	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
 	
 	private Date priceDate;
 	private float openingPrice;
@@ -10,10 +14,10 @@ public class YahooHistory {
 	private float lowPrice;
 	private float closingPrice;
 	private float adjClose;
-	private long daysVolume;
+	private long periodVolume;
 	
 	public YahooHistory(Date priceDate, float openingPrice, float highPrice, float lowPrice, float closingPrice,
-			float adjClose, long daysVolume) {
+			float adjClose, long periodVolume) {
 		super();
 		this.priceDate = priceDate;
 		this.openingPrice = openingPrice;
@@ -21,7 +25,11 @@ public class YahooHistory {
 		this.lowPrice = lowPrice;
 		this.closingPrice = closingPrice;
 		this.adjClose = adjClose;
-		this.daysVolume = daysVolume;
+		this.periodVolume = periodVolume;
+	}
+
+	public YahooHistory() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Date getPriceDate() {
@@ -60,11 +68,21 @@ public class YahooHistory {
 	public void setAdjClose(float adjClose) {
 		this.adjClose = adjClose;
 	}
-	public long getDaysVolume() {
-		return daysVolume;
+	public long getPeriodVolume() {
+		return periodVolume;
 	}
-	public void setDaysVolume(long daysVolume) {
-		this.daysVolume = daysVolume;
+	public void setPeriodVolume(long daysVolume) {
+		this.periodVolume = daysVolume;
+	}
+
+	public void print() {
+		log.info("priceDate=" + this.getPriceDate().toString());
+		log.info("openingPrice=" + String.valueOf(this.getOpeningPrice()));
+		log.info("highPrice=" + String.valueOf(this.getHighPrice()));
+		log.info("lowPrice=" + String.valueOf(this.getLowPrice()));
+		log.info("closingPrice=" + String.valueOf(this.getClosingPrice()));
+		log.info("periodVolume=" + String.valueOf(this.getPeriodVolume()));
+		log.info("adjClose=" + String.valueOf(this.getAdjClose()));
 	}
 	
 }

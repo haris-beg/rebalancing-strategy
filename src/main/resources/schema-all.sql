@@ -7,6 +7,6 @@ CREATE TABLE yahooHistory  (
     highPrice FLOAT,
     lowPrice FLOAT,
     closingPrice FLOAT,
-    daysVolume BIGINT,
+    periodVolume BIGINT,
     adjClose FLOAT
 );
