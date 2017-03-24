@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.logging.Log;
@@ -26,19 +25,16 @@ public class InputCsvFileHandler implements InputFileHandler {
 		log.info("Inside InputCsvFileHandler.process()...");
 		String filename = FILEPATH + ticker + extension;
 		int recordCount = 0;
-		//Read one CSV file and load it into in-memory database
 		try {
 			log.info("Reading file " + filename);
 			Reader in = new FileReader(filename);
 			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
 			for (CSVRecord record : records) {
 				YahooHistory yahooHistory = parseYahooHistoryRecord(record);
-				if (++recordCount < 3) {
-					yahooHistory.print();
-				}
+//				if (++recordCount < 2) {
+//					yahooHistory.print();
+//				}
 				dbHandler.loadYahooHistoryRecord(yahooHistory);
-//			    String columnOne = record.get(0);
-//			    String columnTwo = record.get(1);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
