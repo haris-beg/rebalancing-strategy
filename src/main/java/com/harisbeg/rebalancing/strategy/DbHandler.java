@@ -4,4 +4,6 @@ public interface DbHandler {
 
 	void count();
 
+	void loadYahooHistoryRecord(YahooHistory yahooHistory);
+
 }

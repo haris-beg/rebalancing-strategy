@@ -12,8 +12,11 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class InputCsvFileHandler implements InputFileHandler {
+	@Autowired
+	DbHandler dbHandler;
 	
 	private static final Log log = LogFactory.getLog(InputCsvFileHandler.class);
 	private static final String FILEPATH = "C:\\git-repos\\download-stock-histories\\csv1\\";
@@ -33,7 +36,7 @@ public class InputCsvFileHandler implements InputFileHandler {
 				if (++recordCount < 3) {
 					yahooHistory.print();
 				}
-				
+				dbHandler.loadYahooHistoryRecord(yahooHistory);
 //			    String columnOne = record.get(0);
 //			    String columnTwo = record.get(1);
 			}

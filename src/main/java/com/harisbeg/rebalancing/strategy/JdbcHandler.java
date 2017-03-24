@@ -19,4 +19,12 @@ public class JdbcHandler implements DbHandler {
 		log.info("Number of records in yahooHistory table = " + total);
 	}
 
+	@Override
+	public void loadYahooHistoryRecord(YahooHistory yh) {
+		final String insertSql = "INSERT INTO yahooHistory (priceDate, openingPrice, highPrice, lowPrice,"
+				+ "closingPrice, adjClose, periodVolume) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(insertSql, yh.getPriceDate(), yh.getOpeningPrice(), yh.getHighPrice(), 
+				yh.getLowPrice(), yh.getClosingPrice(), yh.getAdjClose(), yh.getPeriodVolume());
+	}
+
 }
