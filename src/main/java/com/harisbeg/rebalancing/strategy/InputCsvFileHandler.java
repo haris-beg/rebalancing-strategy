@@ -40,7 +40,7 @@ public class InputCsvFileHandler implements InputFileHandler {
 			Reader in = new FileReader(filename);
 			Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
 			for (CSVRecord record : records) {
-				YahooHistory yahooHistory = parseYahooHistoryRecord(record);
+				YahooHistory yahooHistory = parseYahooHistoryRecord(record, ticker);
 				recordCount++;
 //				if (recordCount < 2) {
 //					yahooHistory.print();
@@ -57,9 +57,10 @@ public class InputCsvFileHandler implements InputFileHandler {
 		log.info("Number of records in input file = " + recordCount);
 	}
 
-	private YahooHistory parseYahooHistoryRecord(CSVRecord record) {
+	private YahooHistory parseYahooHistoryRecord(CSVRecord record, String ticker) {
 		YahooHistory yahooHistory = new YahooHistory();
 		try {
+			yahooHistory.setTicker(ticker);
 			DateFormat df = new SimpleDateFormat(priceDateFormat);
 			yahooHistory.setPriceDate(df.parse(record.get("Date")));
 			yahooHistory.setOpeningPrice(Float.parseFloat(record.get("Open")));

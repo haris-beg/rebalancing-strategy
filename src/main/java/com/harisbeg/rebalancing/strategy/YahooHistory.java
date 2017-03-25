@@ -8,6 +8,7 @@ public class YahooHistory {
 	
 	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
 	
+	private String ticker;
 	private Date priceDate;
 	private float openingPrice;
 	private float highPrice;
@@ -16,9 +17,10 @@ public class YahooHistory {
 	private float adjClose;
 	private long periodVolume;
 	
-	public YahooHistory(Date priceDate, float openingPrice, float highPrice, float lowPrice, float closingPrice,
+	public YahooHistory(String ticker, Date priceDate, float openingPrice, float highPrice, float lowPrice, float closingPrice,
 			float adjClose, long periodVolume) {
 		super();
+		this.ticker = ticker;
 		this.priceDate = priceDate;
 		this.openingPrice = openingPrice;
 		this.highPrice = highPrice;
@@ -30,6 +32,14 @@ public class YahooHistory {
 
 	public YahooHistory() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getTicker() {
+		return ticker;
+	}
+
+	public void setTicker(String ticker) {
+		this.ticker = ticker;
 	}
 
 	public Date getPriceDate() {
