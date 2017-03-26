@@ -3,9 +3,7 @@ package com.harisbeg.rebalancing.strategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,9 +35,8 @@ public class JdbcHandler implements DbHandler {
 
 	@Override
 	public Date getHistoryStartDateFor(String ticker) {
-		return null;
-		// TODO Auto-generated method stub
-		
+		String historyStartDateSql = getHistoryStartDateSql + "'" + ticker + "'";
+		return jdbcTemplate.queryForObject(historyStartDateSql, Date.class);
 	}
 
 }

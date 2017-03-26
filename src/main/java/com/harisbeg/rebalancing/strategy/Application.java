@@ -24,9 +24,16 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	InputFileHandler inputFileHandler;
 	
-	 @Override
+	@Autowired
+	StatisticalServiceI statisticalServiceI;
+
+	@Override
 	 public void run(String... strings) throws Exception {
 		 inputFileHandler.process("GLD");
 		 dbHandler.count();
+		 inputFileHandler.process("SPY");
+		 dbHandler.count();
+		 statisticalServiceI.calculateStatsFor("GLD");
+		 statisticalServiceI.calculateStatsFor("SPY");
 	 }
 }

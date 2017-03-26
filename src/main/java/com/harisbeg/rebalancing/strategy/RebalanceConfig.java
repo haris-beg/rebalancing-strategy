@@ -16,4 +16,9 @@ public class RebalanceConfig {
 		return new JdbcHandler();
 	}
 
+	@Bean
+	public StatisticalServiceI statisticalServiceI() {
+		return new StatisticalServiceC();
+	}
+
 }
