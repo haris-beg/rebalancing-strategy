@@ -1,4 +1,4 @@
-package com.harisbeg.rebalancing.strategy;
+package com.harisbeg.rebalancing.strategy.model;
 
 import java.util.Date;
 import org.slf4j.Logger;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class YahooHistory {
 	
-	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(YahooHistory.class);
 	
 	private String ticker;
 	private Date priceDate;

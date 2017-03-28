@@ -1,7 +1,10 @@
-package com.harisbeg.rebalancing.strategy;
+package com.harisbeg.rebalancing.strategy.service;
 
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.harisbeg.rebalancing.strategy.persistence.DbHandler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

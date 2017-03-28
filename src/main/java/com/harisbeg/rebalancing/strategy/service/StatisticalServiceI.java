@@ -1,4 +1,4 @@
-package com.harisbeg.rebalancing.strategy;
+package com.harisbeg.rebalancing.strategy.service;
 
 public interface StatisticalServiceI {
 

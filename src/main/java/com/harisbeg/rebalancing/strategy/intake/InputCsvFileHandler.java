@@ -1,4 +1,4 @@
-package com.harisbeg.rebalancing.strategy;
+package com.harisbeg.rebalancing.strategy.intake;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,6 +14,11 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.harisbeg.rebalancing.strategy.AppConstants;
+import com.harisbeg.rebalancing.strategy.model.YahooHistory;
+import com.harisbeg.rebalancing.strategy.persistence.DbHandler;
+import com.harisbeg.rebalancing.strategy.service.DownloadSvcI;
+
 public class InputCsvFileHandler implements InputFileHandler {
 	
 	@Value("${input.file.path}")
@@ -28,12 +33,14 @@ public class InputCsvFileHandler implements InputFileHandler {
 	@Autowired
 	DbHandler dbHandler;
 	
+
 	private static final Log log = LogFactory.getLog(InputCsvFileHandler.class);
 	
 	@Override
 	public void process(String ticker) {
 		log.info("Inside InputCsvFileHandler.process()...");
-		String filename = inputFilePath + ticker + inputFileExtension;
+		
+		String filename = AppConstants.yahooHistoryFilePath + ticker + AppConstants.yahooHistoryFileExtension;
 		int recordCount = 0;
 		try {
 			log.info("Reading file " + filename);
@@ -61,7 +68,7 @@ public class InputCsvFileHandler implements InputFileHandler {
 		YahooHistory yahooHistory = new YahooHistory();
 		try {
 			yahooHistory.setTicker(ticker);
-			DateFormat df = new SimpleDateFormat(priceDateFormat);
+			DateFormat df = new SimpleDateFormat(AppConstants.yahooPriceDateFormat);
 			yahooHistory.setPriceDate(df.parse(record.get("Date")));
 			yahooHistory.setOpeningPrice(Float.parseFloat(record.get("Open")));
 			yahooHistory.setHighPrice(Float.parseFloat(record.get("High")));
