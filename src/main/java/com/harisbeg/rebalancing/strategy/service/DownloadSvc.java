@@ -1,5 +1,6 @@
 package com.harisbeg.rebalancing.strategy.service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,7 +32,7 @@ public class DownloadSvc implements DownloadSvcI {
 		if (dbHandler.yahooHistoryCount(ticker) > 0) {
 			return;
 		}
-		log.info("Downloading Yahoo Finance History for " + ticker);
+		log.debug("Downloading Yahoo Finance History for " + ticker);
 		String yahooFinUrlStr = AppConstants.yahooFinUrlStr + ticker;
 		int rowCounter = 0;
 		try {
@@ -40,6 +41,7 @@ public class DownloadSvc implements DownloadSvcI {
 			Scanner responseScanner = new Scanner(data.getInputStream());
 
 			if (responseScanner.hasNext()) { // first row is header row, so skip it
+				log.debug(responseScanner.nextLine());
 			}
 
 			while (responseScanner.hasNextLine()) {
@@ -49,10 +51,12 @@ public class DownloadSvc implements DownloadSvcI {
 				dbHandler.loadYahooHistoryRecord(yahooHistory);
 //				printYahooScannerLine(line);
 			}
-			log.info("Number of rows downloaded for " + ticker + " = " + rowCounter);
+			log.debug("Number of rows downloaded for " + ticker + " = " + rowCounter);
 			responseScanner.close();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			log.error("FileNotFoundException happened when downloading Yahoo stock history for " + ticker);;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

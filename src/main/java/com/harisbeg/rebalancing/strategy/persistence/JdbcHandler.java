@@ -2,6 +2,7 @@ package com.harisbeg.rebalancing.strategy.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.harisbeg.rebalancing.strategy.AppConstants;
@@ -67,6 +68,22 @@ public class JdbcHandler implements DbHandler {
 	public Date getHistoryStartDateFor(String ticker) {
 		String historyStartDateSql = getHistoryStartDateSql + "'" + ticker + "'";
 		return jdbcTemplate.queryForObject(historyStartDateSql, Date.class);
+	}
+
+	@Override
+	public float getOpenPrice(String ticker, Date priceDate) {
+		float openPrice = -1;
+		try {
+			openPrice = jdbcTemplate.queryForObject(AppConstants.getOpenPriceForDateSql, Float.class, ticker, priceDate);
+		} catch(EmptyResultDataAccessException e) {
+			log.error("EmptyResultDataAccessException for " + ticker);
+		}
+		return openPrice;
+	}
+
+	@Override
+	public float getClosingPrice(String ticker, Date priceDate) {
+		return jdbcTemplate.queryForObject(AppConstants.getOpenPriceForDateSql, Float.class, ticker, priceDate);
 	}
 
 }

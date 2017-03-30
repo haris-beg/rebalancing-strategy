@@ -24,4 +24,8 @@ public interface DbHandler {
 
 	int p123RealizedTxnCount();
 
+	float getOpenPrice(String ticker, Date priceDate);
+
+	float getClosingPrice(String ticker, Date newBuyDate);
+
 }

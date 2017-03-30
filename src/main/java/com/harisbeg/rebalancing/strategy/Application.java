@@ -58,8 +58,8 @@ public class Application implements CommandLineRunner {
 		log.info("No of recs loaded into the p123RealizedTxns table = " + dbHandler.p123RealizedTxnCount());
 //		p123FileHandler.process("p123WeeklyHistory");
 //		log.info("No of recs loaded into the p123History table = " + dbHandler.p123HistoryCount());
-		downloadSvc.download("GLD");
-		log.info("No of recs loaded into the yahooHistory table = " + dbHandler.yahooHistoryCount());
+//		downloadSvc.download("GLD");
+//		log.info("No of recs loaded into the yahooHistory table = " + dbHandler.yahooHistoryCount());
 		
 //		 inputFileHandler.process("GLD");
 //		 dbHandler.yahooHistoryCount();

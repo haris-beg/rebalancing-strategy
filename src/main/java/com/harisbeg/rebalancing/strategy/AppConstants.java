@@ -9,6 +9,8 @@ public class AppConstants {
 	public static final String p123RealizedTxnCountSql = "SELECT count(*) FROM p123RealizedTxns"; 
 	public static final String yahooTickerHistoryCountSql = "SELECT count(*) FROM yahooHistory WHERE ticker = ";
 	public static final String yahooHistoryCountSql = "SELECT count(*) FROM yahooHistory";
+	public static final String getOpenPriceForDateSql = "SELECT openingPrice FROM yahooHistory WHERE ticker = ? AND priceDate = ?";
+	public static final String getClosingPriceForDateSql = "SELECT closingPrice FROM yahooHistory WHERE ticker = ? AND priceDate = ?";
 	
 	public static final String p123PeriodStartDateFormat = "MM/dd/yyyy";
 	public static final String yahooPriceDateFormat = "yyyy-MM-dd";
