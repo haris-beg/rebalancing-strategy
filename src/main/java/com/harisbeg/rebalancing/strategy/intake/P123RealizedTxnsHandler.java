@@ -20,6 +20,7 @@ import com.harisbeg.rebalancing.strategy.AppConstants;
 import com.harisbeg.rebalancing.strategy.model.P123PortfolioHistory;
 import com.harisbeg.rebalancing.strategy.model.P123RealizedTxn;
 import com.harisbeg.rebalancing.strategy.persistence.DbHandler;
+import com.harisbeg.rebalancing.strategy.service.BusinessRulesSvc;
 import com.harisbeg.rebalancing.strategy.service.DownloadSvcI;
 
 public class P123RealizedTxnsHandler implements P123RealizedTxnsHandlerI {
@@ -27,12 +28,17 @@ public class P123RealizedTxnsHandler implements P123RealizedTxnsHandlerI {
 	@Value("${max.sell3.txns}")
 	private int maxSell3Txns;
 	
-
+	@Value("${skip.all.realized.txns.except.one.out.of.every}")
+	private int skipSllRealizedTxnsExceptOneOutOfEvery;
+	
 	@Autowired
 	DbHandler dbHandler;
 
 	@Autowired
 	DownloadSvcI downloadSvc;
+
+	@Autowired
+	BusinessRulesSvc businessRulesSvc;
 
 	private static final Log log = LogFactory.getLog(P123RealizedTxnsHandler.class);
 
@@ -55,6 +61,10 @@ public class P123RealizedTxnsHandler implements P123RealizedTxnsHandlerI {
 			for (CSVRecord record : records) {
 				P123RealizedTxn p123RealizedTxn = parseP123RealizedTxn(record);
 				recordCount++;
+				if (recordCount % skipSllRealizedTxnsExceptOneOutOfEvery != 0) {
+					//skip all except 1 out of every skipSllRealizedTxnsExceptOneOutOfEvery to speed up execution
+					continue;
+				}
 				log.debug(p123RealizedTxn.toString());
 				if (p123RealizedTxn.getNote().contains("Sell3") && !p123RealizedTxn.getTicker().contains("^")) {
 					dbHandler.loadP123RealizedTxn(p123RealizedTxn);
@@ -116,8 +126,7 @@ public class P123RealizedTxnsHandler implements P123RealizedTxnsHandlerI {
 	 * @return
 	 */
 	private float getNewBuyPrice(String ticker, Date newBuyDate) {
-		// TODO Auto-generated method stub
-		return dbHandler.getClosingPrice(ticker, newBuyDate);
+		return businessRulesSvc.getNewBuyPrice(ticker, newBuyDate);
 	}
 
 	/**
@@ -131,8 +140,7 @@ public class P123RealizedTxnsHandler implements P123RealizedTxnsHandlerI {
 	 * @return
 	 */
 	private Date getNewBuyDate(Date oldBuyDate) {
-		// TODO Auto-generated method stub
-		return oldBuyDate;
+		return businessRulesSvc.getNewBuyDate(oldBuyDate);
 	}
 
 	private P123RealizedTxn parseP123RealizedTxn(CSVRecord record) {

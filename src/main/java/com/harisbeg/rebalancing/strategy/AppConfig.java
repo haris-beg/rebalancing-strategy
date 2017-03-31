@@ -11,6 +11,8 @@ import com.harisbeg.rebalancing.strategy.intake.P123RealizedTxnsHandler;
 import com.harisbeg.rebalancing.strategy.intake.P123RealizedTxnsHandlerI;
 import com.harisbeg.rebalancing.strategy.persistence.DbHandler;
 import com.harisbeg.rebalancing.strategy.persistence.JdbcHandler;
+import com.harisbeg.rebalancing.strategy.service.BusinessRulesSvc;
+import com.harisbeg.rebalancing.strategy.service.BusinessRulesSvcImpl;
 import com.harisbeg.rebalancing.strategy.service.DownloadSvc;
 import com.harisbeg.rebalancing.strategy.service.DownloadSvcI;
 import com.harisbeg.rebalancing.strategy.service.StatisticalServiceC;
@@ -42,6 +44,11 @@ public class AppConfig {
 	@Bean
 	public DownloadSvcI downloadSvc() {
 		return new DownloadSvc();
+	}
+	
+	@Bean
+	public BusinessRulesSvc businessRulesSvc() {
+		return new BusinessRulesSvcImpl();
 	}
 	
 	@Bean
