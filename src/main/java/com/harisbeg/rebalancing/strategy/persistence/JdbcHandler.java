@@ -83,7 +83,7 @@ public class JdbcHandler implements DbHandler {
 
 	@Override
 	public float getClosingPrice(String ticker, Date priceDate) {
-		return jdbcTemplate.queryForObject(AppConstants.getOpenPriceForDateSql, Float.class, ticker, priceDate);
+		return jdbcTemplate.queryForObject(AppConstants.getClosingPriceForDateSql, Float.class, ticker, priceDate);
 	}
 
 }
