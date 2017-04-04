@@ -2,6 +2,8 @@ package com.harisbeg.rebalancing.strategy;
 
 public class AppConstants {
 	
+	public static final long numOfMilliSecsInADay = 86400000;
+	
 	public static final String p123HistoryInsertSql = "INSERT INTO p123History (periodStartDate, periodReturn) VALUES (?, ?)"; 
 	public static final String p123RealizedTxnInsertSql = "INSERT INTO p123RealizedTxns (ticker, positionOpenDate, positionCloseDate, daysHeld) "
 			+ "VALUES (?, ?, ?, ?)"; 
