@@ -27,9 +27,6 @@ public class InputCsvFileHandler implements InputFileHandler {
 	@Value("${input.file.extension}")
 	private String inputFileExtension;
 	
-	@Value("${price.date.format}")
-	private String priceDateFormat;
-
 	@Autowired
 	DbHandler dbHandler;
 	
