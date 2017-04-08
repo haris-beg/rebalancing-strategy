@@ -13,6 +13,10 @@ public class AppConstants {
 	public static final String yahooHistoryCountSql = "SELECT count(*) FROM yahooHistory";
 	public static final String getOpenPriceForDateSql = "SELECT openingPrice FROM yahooHistory WHERE ticker = ? AND priceDate = ?";
 	public static final String getClosingPriceForDateSql = "SELECT closingPrice FROM yahooHistory WHERE ticker = ? AND priceDate = ?";
+	public static final String getHistoryStartDateSql = "SELECT MIN(priceDate) FROM yahooHistory WHERE ticker = ";	
+	public static final String yahooHistoryInsertSql = "INSERT INTO yahooHistory "
+			+ "(ticker, priceDate, openingPrice, highPrice, lowPrice,closingPrice, adjClose, periodVolume, tradingDayNum) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	public static final String p123PeriodStartDateFormat = "MM/dd/yyyy";
 	public static final String yahooPriceDateFormat = "yyyy-MM-dd";

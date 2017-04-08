@@ -18,12 +18,6 @@ public class JdbcHandler implements DbHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
 	
-	@Value("${yahoo.history.insert.sql}")
-	private String yahooHistoryInsertSql;
-	
-	@Value("${get.history.start.date.sql}")
-	private String getHistoryStartDateSql;
-
 	@Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -49,7 +43,7 @@ public class JdbcHandler implements DbHandler {
 
 	@Override
 	public void loadYahooHistoryRecord(YahooHistory yh) {
-		jdbcTemplate.update(yahooHistoryInsertSql, yh.getTicker(), yh.getPriceDate(), yh.getOpeningPrice(), yh.getHighPrice(), 
+		jdbcTemplate.update(AppConstants.yahooHistoryInsertSql, yh.getTicker(), yh.getPriceDate(), yh.getOpeningPrice(), yh.getHighPrice(), 
 				yh.getLowPrice(), yh.getClosingPrice(), yh.getAdjClose(), yh.getPeriodVolume(), yh.getTradingDayNum());
 	}
 
@@ -66,7 +60,7 @@ public class JdbcHandler implements DbHandler {
 
 	@Override
 	public Date getHistoryStartDateFor(String ticker) {
-		String historyStartDateSql = getHistoryStartDateSql + "'" + ticker + "'";
+		String historyStartDateSql = AppConstants.getHistoryStartDateSql + "'" + ticker + "'";
 		return jdbcTemplate.queryForObject(historyStartDateSql, Date.class);
 	}
 
