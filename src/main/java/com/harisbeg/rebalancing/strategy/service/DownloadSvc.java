@@ -28,7 +28,8 @@ public class DownloadSvc implements DownloadSvcI {
 	// Save the history in the yahooHistory DB table
 	@Override
 	public void download(String ticker) {
-		
+		// Download the ticker's history only if it hasn't already been downloaded
+		// Since the same ticker can appear multiple times in the realized txns list
 		if (dbHandler.yahooHistoryCount(ticker) > 0) {
 			return;
 		}
