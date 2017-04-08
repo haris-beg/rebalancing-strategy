@@ -50,7 +50,7 @@ public class JdbcHandler implements DbHandler {
 	@Override
 	public void loadYahooHistoryRecord(YahooHistory yh) {
 		jdbcTemplate.update(yahooHistoryInsertSql, yh.getTicker(), yh.getPriceDate(), yh.getOpeningPrice(), yh.getHighPrice(), 
-				yh.getLowPrice(), yh.getClosingPrice(), yh.getAdjClose(), yh.getPeriodVolume());
+				yh.getLowPrice(), yh.getClosingPrice(), yh.getAdjClose(), yh.getPeriodVolume(), yh.getTradingDayNum());
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class DownloadSvc implements DownloadSvcI {
 			while (responseScanner.hasNextLine()) {
 				rowCounter++;
 				String line = responseScanner.nextLine();
-				YahooHistory yahooHistory = parseYahooHistoryRecord(line, ticker);
+				YahooHistory yahooHistory = parseYahooHistoryRecord(line, ticker, rowCounter);
 				dbHandler.loadYahooHistoryRecord(yahooHistory);
 //				printYahooScannerLine(line);
 			}
@@ -76,7 +76,7 @@ public class DownloadSvc implements DownloadSvcI {
 		lineScanner.close();
 	}
 
-	private YahooHistory parseYahooHistoryRecord(String line, String ticker) {
+	private YahooHistory parseYahooHistoryRecord(String line, String ticker, int tradingDayNum) {
 		// TODO Auto-generated method stub
 		YahooHistory yahooHistory = new YahooHistory();
 		yahooHistory.setTicker(ticker);
@@ -90,6 +90,7 @@ public class DownloadSvc implements DownloadSvcI {
 			yahooHistory.setClosingPrice(lineScanner.nextFloat());
 			yahooHistory.setPeriodVolume(lineScanner.nextLong());
 			yahooHistory.setAdjClose(lineScanner.nextFloat());
+			yahooHistory.setTradingDayNum(tradingDayNum);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

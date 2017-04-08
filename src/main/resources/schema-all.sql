@@ -8,7 +8,8 @@ CREATE TABLE yahooHistory  (
     lowPrice FLOAT,
     closingPrice FLOAT,
     periodVolume BIGINT,
-    adjClose FLOAT
+    adjClose FLOAT,
+    tradingDayNum INT
 );
 
 DROP TABLE p123History IF EXISTS;

@@ -16,9 +16,10 @@ public class YahooHistory {
 	private float closingPrice;
 	private float adjClose;
 	private long periodVolume;
+	private int tradingDayNum;
 	
 	public YahooHistory(String ticker, Date priceDate, float openingPrice, float highPrice, float lowPrice, float closingPrice,
-			float adjClose, long periodVolume) {
+			float adjClose, long periodVolume, int tradingDayNum) {
 		super();
 		this.ticker = ticker;
 		this.priceDate = priceDate;
@@ -28,6 +29,7 @@ public class YahooHistory {
 		this.closingPrice = closingPrice;
 		this.adjClose = adjClose;
 		this.periodVolume = periodVolume;
+		this.tradingDayNum = tradingDayNum;
 	}
 
 	public YahooHistory() {
@@ -85,6 +87,14 @@ public class YahooHistory {
 		this.periodVolume = daysVolume;
 	}
 
+	public int getTradingDayNum() {
+		return tradingDayNum;
+	}
+
+	public void setTradingDayNum(int tradingDayNum) {
+		this.tradingDayNum = tradingDayNum;
+	}
+
 	public void print() {
 		log.info("priceDate=" + this.getPriceDate().toString());
 		log.info("openingPrice=" + String.valueOf(this.getOpeningPrice()));
@@ -93,6 +103,7 @@ public class YahooHistory {
 		log.info("closingPrice=" + String.valueOf(this.getClosingPrice()));
 		log.info("periodVolume=" + String.valueOf(this.getPeriodVolume()));
 		log.info("adjClose=" + String.valueOf(this.getAdjClose()));
+		log.info("tradingDayNum=" + String.valueOf(this.getTradingDayNum()));
 	}
 	
 }
