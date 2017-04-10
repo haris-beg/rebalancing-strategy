@@ -28,7 +28,7 @@ CREATE TABLE p123RealizedTxns  (
     daysHeld INT
 );
 
-DROP TABLE portfolio IF EXISTS;
+DROP TABLE portfolioSnapshots IF EXISTS;
 CREATE TABLE portfolioSnapshots  (
     snapshot_id BIGINT IDENTITY NOT NULL PRIMARY KEY,
     snapshotDate DATE,
