@@ -32,6 +32,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-batch')
 	compile('org.apache.commons:commons-csv:1.4')
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
 	//compile('org.apache.httpcomponents:httpclient:jar:4.5.3')
 	runtime('org.hsqldb:hsqldb')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
